@@ -1,1 +1,7 @@
-<p>client-view works!</p>
+<!-- quitamos los datos del cliente y lo ponemos en su componente -->
+<h3 class="text-xl font-bold">Datos del cliente</h3>
+<ul class="indent-4 join join-vertical border divide-y w-full">
+  <li class="join-item p-1">{{client.name}} {{client.lastname}}</li>
+  <li class="join-item p-1">{{client.address.country}} / {{client.address.city}}</li>
+  <li class="join-item p-1">{{client.address.street}} {{client.address.number}}</li>
+</ul>

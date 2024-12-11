@@ -1,1 +1,34 @@
-<p>list-items works!</p>
+<h4 class="text-xl font-bold">Item de la factura</h4>
+@if (items.length > 0) {
+  <table class="table border">
+    <thead class="table-header-group text-sm">
+    <tr class="table-row">
+      <th class="table-cell">Id</th>
+      <th class="table-cell">Producto</th>
+      <th class="table-cell">Precio</th>
+      <th class="table-cell">Cantidad</th>
+    </tr>
+    </thead>
+    <tbody class="table-row-group">
+    <!-- realizamos for para iterar item de productos por factura -->
+      @for (item of items; track $index) {
+        <tr class="table-row hover:bg-gray-200" app-row-item [item]="item"></tr>
+      }
+    </tbody>
+  </table>
+} @else {
+  <div role="alert" class="alert alert-error">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 shrink-0 stroke-current"
+      fill="none"
+      viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>No tiene items la factura!</span>
+  </div>
+}

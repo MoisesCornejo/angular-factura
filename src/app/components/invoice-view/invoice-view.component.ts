@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-invoice-view',
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './invoice-view.component.css'
 })
 export class InvoiceViewComponent {
+
+  // creamos variables para guardar la informacion que viene desde el padre!
+  @Input() id!: number;
+  @Input() name!: string;
 
 }

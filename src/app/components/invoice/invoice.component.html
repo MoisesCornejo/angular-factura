@@ -4,54 +4,26 @@
       <h2 class="text-2xl">Ejemplo factura</h2>
     </div>
     <div class="card-body space-y-2">
-      <div>
-        <ul class="indent-4 join join-vertical w-full border divide-y">
-          <li class="join-item p-1">Id: {{invoice.id}}</li>
-          <li class="join-item p-1">Nombre: {{invoice.name}}</li>
-        </ul>
-      </div>
+
+      <!-- pegamos el selector del componente invoice-view
+      y pasamos los valores al id y name que vienen desde el padre al hijo
+      mediante variables creadas en invoice.view-->
+      <app-invoice-view [id]="invoice.id" [name]="invoice.name"></app-invoice-view>
 
       <div class="flex w-full space-x-6">
         <div class="flex-col flex-grow">
-          <h3 class="text-xl font-bold">Datos del cliente</h3>
-          <ul class="indent-4 join join-vertical border divide-y w-full">
-            <li class="join-item p-1">{{invoice.client.name}} {{invoice.client.lastname}}</li>
-            <li class="join-item p-1">{{invoice.client.address.country}} / {{invoice.client.address.city}}</li>
-            <li class="join-item p-1">{{invoice.client.address.street}} {{invoice.client.address.number}}</li>
-          </ul>
+
+          <!-- pegamos selector y pasamos el cliente que viene desde el padre al hijo -->
+          <app-client-view [client]="invoice.client"></app-client-view>
+
         </div>
         <div class="flex-col flex-grow">
-          <h3 class="text-xl font-bold">Datos de la empresa</h3>
-          <ul class="indent-4 join join-vertical border divide-y w-full">
-            <li class="join-item p-1">{{invoice.company.name}}</li>
-            <li class="join-item p-1">{{invoice.company.fiscalNumber}}</li>
-          </ul>
+          <app-company-view [company]="invoice.company"></app-company-view>
         </div>
       </div>
 
       <div>
-        <h4 class="text-xl font-bold">Item de la factura</h4>
-        <table class="table border">
-          <thead class="table-header-group text-sm">
-          <tr class="table-row">
-            <th class="table-cell">Id</th>
-            <th class="table-cell">Producto</th>
-            <th class="table-cell">Precio</th>
-            <th class="table-cell">Cantidad</th>
-          </tr>
-          </thead>
-          <tbody class="table-row-group">
-          <!-- realizamos for para iterar item de productos por factura -->
-            @for (item of invoice.items; track $index) {
-              <tr class="table-row hover:bg-gray-200">
-                <td class="table-cell">{{item.id}}</td>
-                <td class="table-cell">{{item.product}}</td>
-                <td class="table-cell">{{item.price}}</td>
-                <td class="table-cell">{{item.quantity}}</td>
-              </tr>
-            }
-          </tbody>
-        </table>
+        <app-list-items [items]="invoice.items"></app-list-items>
       </div>
     </div>
 
