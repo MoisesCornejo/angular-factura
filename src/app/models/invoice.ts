@@ -9,4 +9,5 @@ export class Invoice {
   client!: Client; // indicamos que es de tipo Cliente!
   company!: Company; // indicamos que es de tipo Compañía
   items!: Item[]; // indicamos que es un array de tipo Item
+  total!: number;
 }

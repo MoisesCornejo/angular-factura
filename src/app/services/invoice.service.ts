@@ -14,6 +14,30 @@ export class InvoiceService {
   constructor() { }
 
   getInvoice(): Invoice {
-    return this.invoice;
+    // creamos variable que guardara el valor del metodo
+    const total = this.calculateTotal();
+
+    // esparcimos todos los atributos de la factura con ...
+    // creando una nueva instancia de esta agregandole el campo total
+    // ademas debemos crear una variable total en el modelo invoice
+    return {... this.invoice, total};
+  }
+
+  // Calculamos el total
+  calculateTotal() {
+    // mejoramos la manera de retornar el total
+    return this.invoice.items
+      // utilizamos reduce para devolver el total, ira sumando los totales en el acumulador
+      .reduce((acumulador, item) =>
+        acumulador + item.total(), 0
+      );
+
+    /*let total = 0;
+    // recorremos cada item para calcular precio x cantidad
+    this.invoice.items.forEach(item => {
+      // utilizamos metodo de modelo item que multiplica precio * cantidad
+      total += item.total();
+    });
+    return total;*/
   }
 }
