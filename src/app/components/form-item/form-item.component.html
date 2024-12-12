@@ -1,10 +1,10 @@
-<form class="m-4 space-y-4">
+<form class="m-4 space-y-4" (ngSubmit)="onSubmit()">
 
   <input
     name="product"
     placeholder="Producto"
     class="form-control border-2 rounded-2xl py-1 px-4"
-    [(ngModel)]="item.producto">
+    [(ngModel)]="item.product">
 
   <input
     name="price"

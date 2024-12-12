@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Invoice} from '../models/invoice';
 import {invoiceData} from  '../data/invoice.data'
+import {Item} from '../models/item';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,14 @@ export class InvoiceService {
 
     // devolvemos una nueva factura con el item eliminado
     return {... this.invoice, total}; // esparcimos los dato creando una nueva invoice con el total
+  }
+
+  // creamos metodo para guardar item
+  save(item: Item): Invoice {
+    this.invoice.items = [... this.invoice.items, item];
+    // calculamos el total
+    const total = this.calculateTotal();
+    return {... this.invoice, total};
   }
 
   // Calculamos el total

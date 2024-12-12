@@ -31,7 +31,8 @@
         <app-total [total]="invoice.total"/>
       </div>
       <div class="flex justify-center border rounded-2xl">
-        <app-form-item/>
+        <!-- recibimos el componente del item -->
+        <app-form-item (addItemEventEmitter)="addItem($event)"/>
       </div>
     </div>
 
