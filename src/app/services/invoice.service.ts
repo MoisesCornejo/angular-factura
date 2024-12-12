@@ -29,14 +29,14 @@ export class InvoiceService {
     return this.invoice.items
       // utilizamos reduce para devolver el total, ira sumando los totales en el acumulador
       .reduce((acumulador, item) =>
-        acumulador + item.total(), 0
+        acumulador + (item.price * item.quantity), 0
       );
 
     /*let total = 0;
     // recorremos cada item para calcular precio x cantidad
     this.invoice.items.forEach(item => {
       // utilizamos metodo de modelo item que multiplica precio * cantidad
-      total += item.total();
+      total += item.price * item.quantity;
     });
     return total;*/
   }

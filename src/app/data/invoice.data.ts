@@ -1,7 +1,7 @@
 import {Invoice} from '../models/invoice';
 
 // indicamos que los datos son de tipo invoice!
-export const invoiceData: Invoice = {
+export const invoiceData: any = {
   id:1,
   name: 'Componentes de pc',
   client: {
