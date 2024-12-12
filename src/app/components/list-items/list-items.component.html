@@ -7,12 +7,17 @@
       <th class="table-cell">Producto</th>
       <th class="table-cell">Precio</th>
       <th class="table-cell">Cantidad</th>
+      <th class="table-cell">Eliminar</th> <!-- creamos fila para boton de eliminadp -->
     </tr>
     </thead>
     <tbody class="table-row-group">
     <!-- realizamos for para iterar item de productos por factura -->
       @for (item of items; track $index) {
-        <tr class="table-row hover:bg-gray-200" app-row-item [item]="item"></tr>
+        <tr class="table-row hover:bg-gray-200"
+            app-row-item [item]="item"
+            (removeEventEmitter)="onRemove($event)"></tr>
+            <!-- recibimos el atributo del hijo con el metodo (removeEventEmitter)
+            y le trasmitimos el valor al metodo onRemove($event) que contiene el valor del id pasado -->
       }
     </tbody>
   </table>

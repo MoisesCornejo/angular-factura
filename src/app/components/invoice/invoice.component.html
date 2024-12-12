@@ -23,7 +23,8 @@
       </div>
 
       <div>
-        <app-list-items [items]="invoice.items"></app-list-items>
+        <!-- recibimos el valor pasado desde el hijo en un metodo removeItem($event) el que contiene el valor del id traspasado -->
+        <app-list-items [items]="invoice.items" (removeEventEmitter)="removeItem($event)"></app-list-items>
       </div>
       <div class="border rounded-2xl w-24 h-8 ml-auto flex justify-center items-center">
         <!-- misma manera de agregar e selector del componente pero sin etiqueta de cierre -->

@@ -30,4 +30,13 @@ export class InvoiceComponent implements OnInit { // implementamos OnInit
     this.invoice = this.service.getInvoice();
   }
 
+  // creamos metodo removeItem y pasamos por parametro el id
+  removeItem(id: number) {
+    // eliminamos el items mediante la factura que sera igual al mismo items
+    // filtrando y eliminando con filter donde por cada elemento pasamos el item
+    // y preguntamos si el item.id es distinto al id pasado desde los hijos dejandolo pasar
+    // si es igual lo filtra y se elimina!
+    this.invoice.items = this.invoice.items.filter(item => item.id != id);
+  }
+
 }
