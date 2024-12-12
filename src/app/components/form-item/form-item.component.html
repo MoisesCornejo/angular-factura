@@ -1,0 +1,24 @@
+<form class="m-4 space-y-4">
+
+  <input
+    name="product"
+    placeholder="Producto"
+    class="form-control border-2 rounded-2xl py-1 px-4"
+    [(ngModel)]="item.producto">
+
+  <input
+    name="price"
+    placeholder="Precio"
+    class="form-control border-2 rounded-2xl py-1 px-4"
+    [(ngModel)]="item.price">
+
+  <input
+    name="quantity"
+    placeholder="Cantidad"
+    class="form-control border-2 rounded-2xl py-1 px-4"
+    [(ngModel)]="item.quantity">
+
+  <div class="flex justify-end">
+    <button class="btn btn-outline btn-success btn-sm">Nuevo item</button>
+  </div>
+</form>
