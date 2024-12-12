@@ -23,6 +23,22 @@ export class InvoiceService {
     return {... this.invoice, total};
   }
 
+  // creamos metodo para eliminar valor del item eliminado
+  remove(id: number): Invoice {
+    // eliminamos el items mediante la factura que sera igual al mismo items
+    // filtrando y eliminando con filter donde por cada elemento pasamos el item
+    // y preguntamos si el item.id es distinto al id pasado desde los hijos dejandolo pasar
+    // si es igual lo filtra y se elimina!
+    // pegamos el filter anteriormente hecho
+    this.invoice.items = this.invoice.items.filter(item => item.id != id);
+
+    // recalculamos total despues de hecho el filter
+    const total = this.calculateTotal();
+
+    // devolvemos una nueva factura con el item eliminado
+    return {... this.invoice, total}; // esparcimos los dato creando una nueva invoice con el total
+  }
+
   // Calculamos el total
   calculateTotal() {
     // mejoramos la manera de retornar el total
