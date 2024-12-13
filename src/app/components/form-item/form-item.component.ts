@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {Item} from '../../models/item';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-form-item',
@@ -26,16 +26,24 @@ export class FormItemComponent {
 
 
   // creamos metodo que reciva los datos del formulario y lo trasmita al padre
-  onSubmit(): void {
-    // pasamos el id al item
-    this.addItemEventEmitter.emit({id: this.counterId, ... this.item});
-    this.counterId++;
+  onSubmit(itemForm: NgForm): void {
 
-    // limpiamos datos del formulario
-    this.item = {
-      product: '',
-      price: '',
-      quantity: ''
-    };
+    // validamos el formulario lo mismo que desactivar el boton
+    if (itemForm.valid) {
+      // pasamos el id al item
+      this.addItemEventEmitter.emit({id: this.counterId, ... this.item});
+      this.counterId++;
+
+      // limpiamos datos del formulario
+      this.item = {
+        product: '',
+        price: '',
+        quantity: ''
+      };
+
+      // resetiamos el formulario para que no aparescan los mensajes de validacion despues de guardar un producto
+      itemForm.reset();
+      itemForm.resetForm();
+    }
   }
 }

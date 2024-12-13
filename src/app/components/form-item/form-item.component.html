@@ -1,24 +1,126 @@
-<form class="m-4 space-y-4" (ngSubmit)="onSubmit()">
+<form class="m-4 space-y-4 w-full" (ngSubmit)="onSubmit(itemForm)" #itemForm="ngForm"> <!-- agregamos instancia del btn -->
 
   <input
     name="product"
     placeholder="Producto"
-    class="form-control border-2 rounded-2xl py-1 px-4"
-    [(ngModel)]="item.product">
+    class="form-control border-2 rounded-2xl py-1 px-4 w-full"
+    [(ngModel)]="item.product"
+    required minlength="3"
+    #product="ngModel">
+
+  <!-- creamos mensajes de validacion -->
+  @if (product.invalid && (product.dirty || product.touched)) {
+    @if (product.errors!['required']) {
+      <div class="toast">
+        <div class="alert alert-error h-8 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+          </svg>
+          <span>Nombre requerido</span>
+        </div>
+      </div>
+    }
+
+    @if (product.errors!['minlength']) {
+      <div class="toast">
+        <div class="alert alert-error h-8 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+          </svg>
+          <span>Nombre con minimo 3 caracteres</span>
+        </div>
+      </div>
+    }
+  }
 
   <input
+    type="number"
     name="price"
     placeholder="Precio"
-    class="form-control border-2 rounded-2xl py-1 px-4"
-    [(ngModel)]="item.price">
+    class="form-control border-2 rounded-2xl py-1 px-4 w-full"
+    [(ngModel)]="item.price"
+    required min="1000" max="100000"
+    #price="ngModel">
+
+  <!-- creamos mensajes de validacion -->
+  @if (price.invalid && (price.dirty || price.touched)) {
+    @if (price.errors!['required']) {
+      <div class="toast">
+        <div class="alert alert-error h-8 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+          </svg>
+          <span>Precio requerido</span>
+        </div>
+      </div>
+    }
+
+    @if (price.errors!['min']) {
+      <div class="toast">
+        <div class="alert alert-error h-8 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+          </svg>
+          <span>Precio minimo de $1.000</span>
+        </div>
+      </div>
+    } @else if (price.errors!['max']) {
+      <div class="toast">
+        <div class="alert alert-error h-8 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+          </svg>
+          <span>Precio maximo de $100.000</span>
+        </div>
+      </div>
+    }
+  }
 
   <input
+    type="number"
     name="quantity"
     placeholder="Cantidad"
-    class="form-control border-2 rounded-2xl py-1 px-4"
-    [(ngModel)]="item.quantity">
+    class="form-control border-2 rounded-2xl py-1 px-4 w-full"
+    [(ngModel)]="item.quantity"
+    required min="1" max="50"
+    #quantity="ngModel">
+
+  @if (quantity.invalid && (quantity.dirty || quantity.touched)) {
+    @if (quantity.errors!['required']) {
+      <div class="toast">
+        <div class="alert alert-error h-8 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+          </svg>
+          <span>Cantidad requerida</span>
+        </div>
+      </div>
+    }
+
+    @if (quantity.errors!['min']) {
+      <div class="toast">
+        <div class="alert alert-error h-8 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+          </svg>
+          <span>Cantidad minima de 1</span>
+        </div>
+      </div>
+    } @else if (quantity.errors!['max']) {
+      <div class="toast">
+        <div class="alert alert-error h-8 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+          </svg>
+          <span>Cantidad maxima de 50</span>
+        </div>
+      </div>
+    }
+  }
 
   <div class="flex justify-end">
-    <button class="btn btn-outline btn-success btn-sm">Nuevo item</button>
+    <!-- agregamos instancia para desactivar o activar el boton dependiendo si cumple con las validaciones del formulario -->
+    <button class="btn btn-outline btn-success btn-sm"
+            [disabled]="itemForm.invalid">Nuevo item</button>
   </div>
 </form>
