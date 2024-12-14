@@ -1,59 +1,121 @@
 # Facturas
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.4.
+Proyecto donde utilizamos `Angular` con `Tailwindcss` y `DaisyUI`. Dividimos en subcomponente los componentes de una factura y los comunicamos entre sí.
 
-## Development server
+## Métodos y Directivas Utilizadas
+### Métodos en TypeScript
 
-To start a local development server, run:
+1. **OnInit**:
+  - Método de la interfaz `OnInit` que se ejecuta una vez que Angular ha inicializado completamente las propiedades enlazadas a datos de un componente.
+  - Ejemplo:
+    ```typescript
+    import { OnInit } from '@angular/core';
 
-```bash
-ng serve
-```
+    export class ExampleComponent implements OnInit {
+      ngOnInit(): void {
+        // Lógica de inicialización
+      }
+    }
+    ```
+2. **EventEmitter**:
+  - Clase utilizada para emitir eventos desde un componente hijo hacia un componente padre.
+  - Ejemplo:
+    ```typescript
+    import { EventEmitter, Output } from '@angular/core';
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+    export class ExampleComponent {
+      @Output() eventEmitter: EventEmitter<string> = new EventEmitter();
 
-## Code scaffolding
+      emitEvent(): void {
+        this.eventEmitter.emit('Evento emitido');
+      }
+    }
+    ```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Directivas en HTML
 
-```bash
-ng generate component component-name
-```
+1. **(click)**:
+  - Directiva utilizada para asignar un evento de clic a un elemento del DOM.
+  - Ejemplo:
+    ```html
+    <button (click)="onRemove(item.id)">Eliminar</button>
+    ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2. **@Input()**:
+  - Decorador utilizado para recibir datos desde un componente padre.
+  - Ejemplo:
+    ```typescript
+    import { Input } from '@angular/core';
 
-```bash
-ng generate --help
-```
+    export class ExampleComponent {
+      @Input() data!: string;
+    }
+    ```
 
-## Building
+3. **@Output()**:
+  - Decorador utilizado para emitir eventos desde un componente hijo hacia un componente padre.
+  - Ejemplo:
+    ```typescript
+    import { Output, EventEmitter } from '@angular/core';
 
-To build the project run:
+    export class ExampleComponent {
+      @Output() eventEmitter: EventEmitter<string> = new EventEmitter();
+    }
+    ```
 
-```bash
-ng build
-```
+4. **ngModel**:
+  - Directiva utilizada para el enlace bidireccional de datos entre el formulario y el componente.
+  - Ejemplo:
+    ```html
+    <input [(ngModel)]="item.product" required minlength="3">
+    ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+5. **ngSubmit**:
+  - Directiva utilizada en el formulario para capturar el evento de envío del formulario y ejecutar un método en el componente.
+  - Ejemplo:
+    ```html
+    <form (ngSubmit)="onSubmit(itemForm)" #itemForm="ngForm">
+    ```
 
-## Running unit tests
+6. **ngForm**:
+  - Directiva utilizada para trabajar con formularios en Angular.
+  - Ejemplo:
+    ```html
+    <form #itemForm="ngForm">
+    ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+7. **@if** y **@else**:
+   - Directivas utilizadas para mostrar u ocultar elementos en el DOM basado en una condición.
+   - Ejemplo:
+   ```html
+   @if (price.errors!['min']) {
+     <div class="toast">
+       <div class="alert alert-error h-8 flex items-center justify-center">
+         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+           <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+         </svg>
+         <span>Precio minimo de $1.000</span>
+       </div>
+     </div>
+   } @else if (price.errors!['max']) {
+     <div class="toast">
+       <div class="alert alert-error h-8 flex items-center justify-center">
+         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+           <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+         </svg>
+         <span>Precio maximo de $100.000</span>
+       </div>
+     </div>
+   }
+    ```
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+8. **@for**:
+   - Directiva utilizada para iterar sobre una colección y renderizar un elemento para cada ítem en la colección.
+   - Ejemplo:
+     ```html
+     @for (item of items; track $index) {
+        <tr class="table-row hover:bg-gray-200"
+            app-row-item [item]="item"
+            (removeEventEmitter)="onRemove($event)"></tr>
+     }
+     ```
