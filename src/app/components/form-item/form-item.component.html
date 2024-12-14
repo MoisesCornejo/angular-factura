@@ -1,9 +1,9 @@
-<form class="m-4 space-y-4 w-full" (ngSubmit)="onSubmit(itemForm)" #itemForm="ngForm"> <!-- agregamos instancia del btn -->
+<form class="m-4 space-y-4 w-full justify-center" (ngSubmit)="onSubmit(itemForm)" #itemForm="ngForm"> <!-- agregamos instancia del btn -->
 
   <input
     name="product"
     placeholder="Producto"
-    class="form-control border-2 rounded-2xl py-1 px-4 w-full"
+    class="form-control border-2 rounded-2xl py-1 px-4 w-60"
     [(ngModel)]="item.product"
     required minlength="3"
     #product="ngModel">
@@ -37,7 +37,7 @@
     type="number"
     name="price"
     placeholder="Precio"
-    class="form-control border-2 rounded-2xl py-1 px-4 w-full"
+    class="form-control border-2 rounded-2xl py-1 px-4 w-60"
     [(ngModel)]="item.price"
     required min="1000" max="100000"
     #price="ngModel">
@@ -80,7 +80,7 @@
     type="number"
     name="quantity"
     placeholder="Cantidad"
-    class="form-control border-2 rounded-2xl py-1 px-4 w-full"
+    class="form-control border-2 rounded-2xl py-1 px-4 w-60"
     [(ngModel)]="item.quantity"
     required min="1" max="50"
     #quantity="ngModel">
@@ -118,7 +118,7 @@
     }
   }
 
-  <div class="flex justify-end">
+  <div class="flex">
     <!-- agregamos instancia para desactivar o activar el boton dependiendo si cumple con las validaciones del formulario -->
     <button class="btn btn-outline btn-success btn-sm"
             [disabled]="itemForm.invalid">Nuevo item</button>
