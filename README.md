@@ -1,7 +1,7 @@
 # Facturas
 # [LINK GITHUBPAGE](https://moisescornejo.github.io/angular-factura/)
 
-Proyecto donde utilizamos `Angular` con `Tailwindcss` y `DaisyUI`. Dividimos en subcomponente los componentes de una factura y los comunicamos entre sí.
+Proyecto donde se utilizó `Angular` con `Tailwindcss` y `DaisyUI`. Dividimos en subcomponente los componentes de una factura y los comunicamos entre sí.
 
 ## Métodos y Directivas Utilizadas
 ### Métodos en TypeScript
